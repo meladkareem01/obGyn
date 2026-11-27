@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Endometriosis &amp; Adenomyosis — Clinical Notes &amp; Qbank</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #F7F9FB;
+      --bg-card: #FFFFFF;
+      --border-subtle: #E2E8F0;
+      --navy-primary: #0F2942;
+      --teal-accent: #0D9488;
+      --teal-light: #F0FDFA;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: #1E293B;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Smooth accordion transition */
+    .accordion-content {
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+    }
+
+    /* Embossed subtle card elevation */
+    .emboss-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(15, 41, 66, 0.04), 0 1px 2px rgba(15, 41, 66, 0.02);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .emboss-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(15, 41, 66, 0.06);
+    }
+
+    /* Strike-out option style */
+    .option-struck {
+      text-decoration: line-through;
+      opacity: 0.48;
+      background-color: #F8FAFC !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Sticky Top Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <!-- App Title & Subtitle -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#0F2942] text-white flex items-center justify-center font-bold text-lg shadow-sm shrink-0">
+            🩺
+          </div>
+          <div>
+            <h1 class="text-base sm:text-lg font-bold text-[#0F2942] leading-tight">
+              Endometriosis &amp; Adenomyosis — Clinical Notes &amp; Qbank
+            </h1>
+            <p class="text-xs text-slate-500 font-medium">
+              Iraqi Wizari &amp; USMLE Step 2 CK High-Yield Study Suite
+            </p>
+          </div>
+        </div>
+
+        <!-- Global Study Progress Bar -->
+        <div class="flex items-center gap-3 bg-slate-50 border border-slate-200/80 rounded-xl px-3.5 py-2 min-w-[230px] sm:min-w-[260px]">
+          <div class="flex-1">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span id="global-progress-text" class="text-[#0F2942]">0 of 14 Sections Completed</span>
+              <span id="global-progress-pct" class="text-[#0D9488]">0%</span>
+            </div>
+            <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="h-full bg-[#0D9488] rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Tab Switcher & Quick Controls -->
+      <div class="mt-3 pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+        <nav class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl" role="tablist">
+          <button
+            id="tab-notes"
+            onclick="switchTab('notes')"
+            role="tab"
+            aria-selected="true"
+            class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-[#0F2942] shadow-sm"
+          >
+            📖 Study Notes
+          </button>
+          <button
+            id="tab-qbank"
+            onclick="switchTab('qbank')"
+            role="tab"
+            aria-selected="false"
+            class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-[#0F2942]"
+          >
+            🩺 AMBOSS-Style Qbank (MCQs)
+          </button>
+        </nav>
+
+        <!-- Notes Controls (visible only on Study Notes tab) -->
+        <div id="notes-controls" class="flex items-center gap-2">
+          <button
+            onclick="expandAllSections()"
+            class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-[#0F2942] bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors"
+          >
+            Expand All
+          </button>
+          <button
+            onclick="collapseAllSections()"
+            class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-[#0F2942] bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors"
+          >
+            Collapse All
+          </button>
+          <button
+            onclick="resetStudyProgress()"
+            title="Reset all section checkmarks and crawl progress"
+            class="px-2.5 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 bg-white border border-slate-200 rounded-lg transition-colors"
+          >
+            Reset Progress
+          </button>
+        </div>
+
+        <!-- Qbank Live Score Pill (visible only on Qbank tab) -->
+        <div id="qbank-controls" class="hidden items-center gap-2">
+          <span id="qbank-score-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-teal-50 text-[#0D9488] border border-teal-200">
+            Score: 0 / 0 (0%)
+          </span>
+          <button
+            onclick="resetQbank()"
+            class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 border border-slate-200 rounded-lg transition-colors"
+          >
+            Reset Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: STUDY NOTES VIEW                    -->
+    <!-- ========================================== -->
+    <section id="view-notes" class="space-y-4">
+      <!-- Compact Table of Contents / Quick Jump Strip -->
+      <div class="emboss-card rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-[#0F2942] flex items-center gap-2">
+            <span>📑</span> Compact Table of Contents &amp; Quick Jump
+          </h2>
+          <span class="text-xs text-slate-500">Click any topic to open &amp; jump</span>
+        </div>
+        <div id="toc-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Sections Container -->
+      <div id="sections-container" class="space-y-4 pb-16">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: AMBOSS-STYLE QBANK VIEW             -->
+    <!-- ========================================== -->
+    <section id="view-qbank" class="hidden space-y-4 pb-16">
+      <!-- Filter & Question Navigator Bar -->
+      <div class="emboss-card rounded-2xl p-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <label for="section-filter" class="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Filter by Section:
+            </label>
+            <select
+              id="section-filter"
+              onchange="filterQuestionsBySection(this.value)"
+              class="text-xs sm:text-sm font-medium text-[#0F2942] bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#0D9488]"
+            >
+              <option value="all">All Sections (28 Questions)</option>
+            </select>
+          </div>
+          <div class="text-xs text-slate-500 flex items-center gap-3">
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Correct</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Incorrect</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-200 inline-block"></span> Unanswered</span>
+          </div>
+        </div>
+
+        <!-- Numbered Question Navigator Strip -->
+        <div id="question-nav-grid" class="flex flex-wrap gap-1.5 pt-3">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Active Question Card -->
+      <div id="qbank-card" class="emboss-card rounded-2xl overflow-hidden">
+        <!-- Question Header -->
+        <div class="bg-slate-50/80 border-b border-slate-200 px-5 py-3.5 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <span id="q-counter" class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#0F2942] text-white">
+              Question 1 of 28
+            </span>
+            <span id="q-section-tag" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-teal-50 text-[#0D9488] border border-teal-200/70">
+              Section 1
+            </span>
+          </div>
+          <span id="q-exam-tag" class="text-xs font-semibold text-slate-500 bg-white px-2.5 py-1 rounded-md border border-slate-200">
+            USMLE Step 2 CK • Iraqi Wizari
+          </span>
+        </div>
+
+        <!-- Question Stem -->
+        <div class="p-5 sm:p-6">
+          <p id="q-stem" class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed mb-5">
+            <!-- Stem text -->
+          </p>
+
+          <!-- Options List -->
+          <div id="q-options" class="space-y-2.5">
+            <!-- Options A-E rendered here -->
+          </div>
+
+          <!-- AMBOSS-Style Explanation Box (Hidden until answered/submitted) -->
+          <div id="q-explanation-box" class="hidden mt-6 rounded-xl border border-teal-200 bg-teal-50/50 p-4 sm:p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-base">💡</span>
+              <h4 class="text-sm font-bold text-[#0F2942]">AMBOSS-Style Clinical Explanation</h4>
+            </div>
+            <p id="q-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <!-- Explanation text -->
+            </p>
+          </div>
+        </div>
+
+        <!-- Qbank Action Footer -->
+        <div class="bg-slate-50 border-t border-slate-200 px-5 py-3.5 flex items-center justify-between gap-3">
+          <button
+            id="btn-prev-q"
+            onclick="prevQuestion()"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            ⬅️ Previous
+          </button>
+
+          <button
+            id="btn-show-answer"
+            onclick="revealCurrentAnswer()"
+            class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0D9488] hover:bg-teal-700 text-white shadow-sm transition-colors"
+          >
+            Show Answer / Submit
+          </button>
+
+          <button
+            id="btn-next-q"
+            onclick="nextQuestion()"
+            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#0F2942] hover:bg-slate-800 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            Next ➡️
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Box (Replaces any alert/confirm) -->
+  <div id="toast-msg" class="fixed bottom-5 right-5 z-50 hidden bg-[#0F2942] text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg border border-slate-700"></div>
+
+  <script>
+    // =========================================================================
+    // 1. COMPLETE VERBATIM STRUCTURED NOTES DATA (ALL 14 SECTIONS)
+    // =========================================================================
+    const SECTIONS_DATA = [
+      {
+        id: 1,
+        partBadge: "Part I: Endometriosis",
+        title: "🌸 Definition, Pathophysiology & Epidemiology",
+        examSummary: "Benign, estrogen-dependent endometrial glands & stroma outside the uterus (resolves at menopause/pseudomenopause). Affects ~10% of reproductive-age women and 30%–40% of infertile women. Most common site: pelvic peritoneum, especially uterosacral ligaments. Cyclical bleeding triggers inflammation, fibrosis, and adhesions causing pain & infertility.",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Definition:</strong> A common, benign, estrogen-dependent gynecologic disorder defined as the presence of <strong class="text-[#0F2942]">endometrial glands and stroma outside the endometrium</strong>.</li>
+            <li><strong class="text-[#0F2942]">Hormonal Dependence:</strong> Because it is estrogen-dependent, it chiefly affects women of <strong class="text-[#0F2942]">reproductive age</strong> and resolves after menopause or when treatment induces a <strong class="text-[#0F2942]">"pseudomenopause"</strong> (suppression of ovarian estradiol production).</li>
+            <li><strong class="text-[#0F2942]">Pathophysiology of Pain &amp; Infertility:</strong>
+              <ul class="list-circle pl-5 mt-1.5 space-y-1.5 text-slate-600">
+                <li>Ectopic endometriotic tissue responds to cyclical hormonal changes, undergoing <strong class="text-slate-800">cyclical bleeding</strong> and triggering a local inflammatory reaction.</li>
+                <li>Repeated cycles of bleeding and healing lead to <strong class="text-slate-800">fibrosis</strong> and <strong class="text-slate-800">adhesions</strong> between adjacent pelvic organs, causing chronic pain and infertility.</li>
+              </ul>
+            </li>
+            <li><strong class="text-[#0F2942]">Anatomical Sites of Involvement:</strong>
+              <ul class="list-circle pl-5 mt-1.5 space-y-1.5 text-slate-600">
+                <li><strong class="text-slate-800">Most common:</strong> Pelvic peritoneum, especially the <strong class="text-slate-800">uterosacral ligaments</strong>.</li>
+                <li><strong class="text-slate-800">Other pelvic sites:</strong> Ovaries (forming endometriomas), rectovaginal septum, anterior/posterior cul-de-sac (pouch of Douglas), pelvic colon, and ureters.</li>
+                <li><strong class="text-slate-800">Rare/Extrapelvic sites:</strong> Bladder, pericardium, pleura/pleural cavity, umbilicus, abdominal surgical scars, perineum, vulva, and nasal passages.</li>
+              </ul>
+            </li>
+            <li><strong class="text-[#0F2942]">Incidence &amp; Risk Factors:</strong>
+              <ul class="list-circle pl-5 mt-1.5 space-y-1.5 text-slate-600">
+                <li><strong class="text-slate-800">General reproductive-age women:</strong> ~<strong class="text-[#0D9488]">10%</strong>.</li>
+                <li><strong class="text-slate-800">Women with infertility:</strong> <strong class="text-[#0D9488]">30%–40%</strong> (of whom 10% have deep infiltrating endometriosis).</li>
+                <li><strong class="text-slate-800">Diagnostic laparoscopy for pelvic pain or infertility:</strong> Found in <strong class="text-[#0D9488]">at least one-third</strong> of patients.</li>
+                <li><strong class="text-slate-800">True incidence:</strong> Difficult to quantify because many women remain asymptomatic.</li>
+                <li><strong class="text-slate-800">Risk factors:</strong> First-degree relative with endometriosis, autoimmune disease, race, and infertility.</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="mt-4 rounded-xl bg-amber-50/80 border border-amber-200/80 p-3.5 text-xs sm:text-sm text-amber-950">
+            <strong class="font-bold text-amber-900">💡 Think of...</strong> Endometriosis whenever a reproductive-age woman presents with <strong class="font-semibold">cyclical pain + infertility + fixed pelvic anatomy</strong>, because monthly micro-hemorrhages act like glue, scarring the pouch of Douglas and ovaries together.
+          </div>
+        `
+      },
+      {
+        id: 2,
+        partBadge: "Part I: Endometriosis",
+        title: "🧬 Etiology & Theories of Pathogenesis",
+        examSummary: "Four main theories: (1) Sampson's implantation theory (retrograde menstruation via patent fallopian tubes; explains surgical/cesarean scar implants), (2) Meyer's coelomic metaplasia theory (peritoneal Müllerian cells de-differentiate under hormonal/inflammatory stimuli), (3) Genetic/immunological susceptibility (first-degree relatives), and (4) Vascular/lymphatic spread (explains distant lung/pleural lesions).",
+        contentHTML: `
+          <p class="text-sm text-slate-600 mb-3">No single theory explains all cases; four main mechanisms are recognized:</p>
+          <ol class="space-y-3 text-sm text-slate-700 leading-relaxed list-decimal pl-5">
+            <li>
+              <strong class="text-[#0F2942]">Sampson's Implantation Theory (Retrograde Menstruation):</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Postulates retrograde menstrual regurgitation of viable endometrial glands and tissue through <strong class="text-slate-800">patent fallopian tubes</strong> during menses, followed by implantation onto the pelvic peritoneal surface.</li>
+                <li><strong class="text-slate-800">Supporting evidence:</strong> Menstrual blood is visible in the pelvis during laparoscopy at menses; primate models develop endometriosis from menstrual blood; and endometrial tissue implants within human surgical scars after cesarean section or perineal repair.</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-[#0F2942]">Meyer's Coelomic Metaplasia Theory:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Describes the de-differentiation of peritoneal cells lining the Müllerian duct back to their primitive origin, followed by transformation into endometrial cells due to <strong class="text-slate-800">hormonal stimuli or inflammatory irritation</strong>.</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-[#0F2942]">Genetic and Immunological Factors:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Alter individual susceptibility to developing endometriosis.</li>
+                <li>Supported by increased incidence in <strong class="text-slate-800">first-degree relatives</strong> (racial differences remain unclear due to study biases).</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-[#0F2942]">Vascular and Lymphatic Spread:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Vascular and lymphatic embolization to distant organs explains rare extraperitoneal implants, such as in the <strong class="text-slate-800">lungs/thorax</strong>.</li>
+              </ul>
+            </li>
+          </ol>
+          <div class="mt-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 p-3.5 text-xs sm:text-sm text-indigo-950">
+            <strong class="font-bold text-indigo-900">🧠 Memory Trick:</strong> <strong>S</strong>ampson = <strong>S</strong>pillage backward (retrograde flow) &amp; <strong>S</strong>car implants; <strong>M</strong>eyer = <strong>M</strong>etaplasia of <strong>M</strong>üllerian coelomic lining.
+          </div>
+        `
+      },
+      {
+        id: 3,
+        partBadge: "Part I: Endometriosis",
+        title: "🩺 Clinical Presentation & Site-Specific Symptoms",
+        examSummary: "Classic non-colicky cyclical pelvic pain starting 1–2 days before menses and resolving at the end of menses. Deep dyspareunia signals pouch of Douglas/uterosacral disease. Pain intensity does NOT correlate with visible disease extent—it correlates with depth of invasion. Site-specific clues: cyclical hematuria/dysuria (bladder), dyschezia/cyclical rectal bleeding (GI), catamenial hemopneumothorax/hemoptysis (thorax).",
+        contentHTML: `
+          <p class="text-sm text-slate-600 mb-3">Although women may be asymptomatic, symptoms typically follow a cyclical pattern dictated by implant location:</p>
+          <h4 class="text-sm font-bold text-[#0F2942] mb-2">Classical Clinical Picture</h4>
+          <ul class="space-y-2 text-sm text-slate-700 leading-relaxed list-disc pl-5 mb-4">
+            <li><strong class="text-[#0F2942]">Severe cyclical, non-colicky pelvic pain</strong> restricted to around menstruation.</li>
+            <li><strong class="text-[#0F2942]">Timing:</strong> Gradual in onset; typically starts <strong class="text-[#0D9488]">1–2 days (a few days) before menses</strong> and subsides at the <strong class="text-[#0D9488]">end of menses</strong>.</li>
+            <li><strong class="text-[#0F2942]">Associated symptoms:</strong> Heavy menstrual bleeding (menorrhagia), pain radiating to the lower back, legs, and vagina, and <strong class="text-[#0F2942]">deep dyspareunia</strong> (strongly suggests implants in the <strong class="text-[#0F2942]">pouch of Douglas</strong> or uterosacral ligaments).</li>
+            <li><strong class="text-[#0F2942]">Cervical/Vaginal lesions:</strong> May cause <strong class="text-[#0F2942]">postcoital bleeding</strong>.</li>
+            <li><strong class="text-[#0F2942]">Bowel overlap:</strong> Colicky pelvic pain throughout the cycle may mimic or coexist with <strong class="text-[#0F2942]">irritable bowel syndrome (IBS)</strong>.</li>
+          </ul>
+
+          <div class="mb-4 rounded-xl bg-teal-50/80 border border-teal-200 p-3.5 text-xs sm:text-sm text-teal-950">
+            <strong class="font-bold text-teal-900">💎 Clinical Pearl:</strong> There is a <strong class="font-semibold">lack of correlation between the extent of visible disease and the intensity of pain</strong>. Pain severity correlates instead with the <strong class="font-semibold">depth of invasion</strong> (deep infiltrating lesions cause more severe pain, which may not be fully appreciated on surface laparoscopy).
+          </div>
+
+          <h4 class="text-sm font-bold text-[#0F2942] mb-2">Site-Specific Symptoms Table</h4>
+          <div class="overflow-x-auto rounded-xl border border-slate-200 mb-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-[#0F2942] text-white">
+                  <th class="py-2.5 px-3.5 font-semibold w-1/3">Anatomical Site</th>
+                  <th class="py-2.5 px-3.5 font-semibold">Characteristic Clinical Symptoms</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-2.5 px-3.5 font-semibold text-[#0F2942]">Female Reproductive Tract</td>
+                  <td class="py-2.5 px-3.5 text-slate-700">Cyclical pelvic pain (secondary dysmenorrhea), non-cyclical pelvic pain, deep dyspareunia, pain radiating to lower back/legs/vagina, postcoital bleeding (if on cervix), infertility</td>
+                </tr>
+                <tr class="bg-slate-50/60">
+                  <td class="py-2.5 px-3.5 font-semibold text-[#0F2942]">Urinary Tract</td>
+                  <td class="py-2.5 px-3.5 text-slate-700">Cyclical hematuria, cyclical dysuria, loin/flank pain (due to ureteric obstruction)</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3.5 font-semibold text-[#0F2942]">Gastrointestinal Tract</td>
+                  <td class="py-2.5 px-3.5 text-slate-700">Dyschezia (pain on defecation), cyclical rectal bleeding, abdominal distension/colicky pain (obstruction)</td>
+                </tr>
+                <tr class="bg-slate-50/60">
+                  <td class="py-2.5 px-3.5 font-semibold text-[#0F2942]">Surgical Scars / Umbilicus</td>
+                  <td class="py-2.5 px-3.5 text-slate-700">Cyclical pain, swelling, and bleeding at the scar/umbilical site</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3.5 font-semibold text-[#0F2942]">Thorax</td>
+                  <td class="py-2.5 px-3.5 text-slate-700">Catamenial hemopneumothorax, catamenial hemoptysis, right upper abdominal or chest pain</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="text-sm font-bold text-[#0F2942] mb-2">Multifactorial Mechanisms of Infertility (30%–40% Prevalence)</h4>
+          <ul class="space-y-1.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Ovarian function:</strong> Prostaglandin F<sub>2&alpha;</sub>-induced luteolysis, oocyte maturation defects, endocrinopathies, luteinized unruptured follicle (LUF) syndrome, altered prolactin release, and anovulation.</li>
+            <li><strong class="text-[#0F2942]">Tubal function:</strong> Impaired fimbrial oocyte pick-up and altered tubal mobility (from peritubal/periovarian adhesions).</li>
+            <li><strong class="text-[#0F2942]">Coital function:</strong> Deep dyspareunia leading to reduced coital frequency.</li>
+            <li><strong class="text-[#0F2942]">Sperm function:</strong> Antisperm antibodies causing inactivation and macrophage phagocytosis of spermatozoa.</li>
+            <li><strong class="text-[#0F2942]">Early pregnancy failure:</strong> Prostaglandin-induced immune reaction and luteal phase deficiency.</li>
+          </ul>
+        `
+      },
+      {
+        id: 4,
+        partBadge: "Part I: Endometriosis",
+        title: "🔍 Diagnostic Workup, Staging & Presumptive Diagnosis",
+        examSummary: "Bimanual exam may be normal (does not exclude disease) or show tender uterosacral ligament nodularity, posterior fornix nodules, adnexal endometrioma, or a fixed retroverted uterus. CA-125 is nonspecific and NOT diagnostic. TVS is first-line (ovarian endometrioma with fine internal echoes / 'ground-glass' appearance); MRI maps deep infiltrating lesions; diagnostic laparoscopy + biopsy is the gold standard.",
+        contentHTML: `
+          <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Physical &amp; Bimanual Examination</h4>
+              <p class="text-slate-600 mb-2">Findings vary by implant size and location; a <strong class="text-slate-800">normal physical exam does not exclude endometriosis</strong>:</p>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-[#0F2942]">Speculum exam:</strong> Rarely visualizes bluish/red lesions on the cervix or vaginal mucosa.</li>
+                <li><strong class="text-[#0F2942]">Bimanual / Pelvic palpation:</strong>
+                  <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                    <li>Tenderness on vaginal examination.</li>
+                    <li><strong class="text-slate-800">Nodularity and tenderness along the uterosacral ligaments</strong> or in the <strong class="text-slate-800">posterior fornix</strong> (reflects active disease or scarring).</li>
+                    <li>Enlarged cystic adnexal mass (<strong class="text-slate-800">ovarian endometrioma</strong>), which may be mobile or adherent to pelvic structures.</li>
+                    <li><strong class="text-slate-800">Retroverted, fixed, tender uterus</strong>, or lateral displacement/immobility of the cervix or uterus.</li>
+                    <li><em>Differential diagnosis for restricted uterine mobility:</em> Chronic pelvic inflammatory disease (PID) and uterine, ovarian, or cervical malignancy.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Laboratory Investigations &amp; Biomarkers</h4>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-[#0F2942]">Initial infection workup:</strong> CBC, urinalysis, urine culture, vaginal cultures, and cervical swabs to rule out infectious causes of pelvic pain.</li>
+                <li><strong class="text-[#0F2942]">Biomarkers (CA-125 &amp; DNA deletions):</strong> Currently <strong class="text-rose-700">too inaccurate for routine clinical diagnosis</strong>. CA-125 is nonspecific and rises in menstruation, uterine fibroids, and ovarian, endometrial, peritoneal, or fallopian tube cancers.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Imaging Modalities</h4>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-[#0F2942]">Transvaginal Ultrasound (TVS):</strong>
+                  <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                    <li>First-line imaging to detect <strong class="text-slate-800">ovarian endometriomas</strong> ("chocolate cysts": smooth-walled brown cysts filled with thick, chocolate-appearing old blood).</li>
+                    <li><strong class="text-slate-800">Classic TVS appearance:</strong> Ovarian mass with <strong class="text-[#0D9488]">multiple fine internal echoes</strong> ("ground-glass" appearance [added]) and <strong class="text-[#0D9488]">hyperechoic mural foci</strong>.</li>
+                    <li>Limited for small peritoneal implants, but reassures by excluding gross pathology.</li>
+                  </ul>
+                </li>
+                <li><strong class="text-[#0F2942]">Pelvic MRI:</strong> Superior for detecting <strong class="text-slate-800">deep infiltrating endometriosis</strong> (e.g., rectovaginal septum, pouch of Douglas, rectosigmoid colon) and aids <strong class="text-slate-800">presurgical planning</strong> in complex cases.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Gold Standard: Diagnostic Laparoscopy + Biopsy</h4>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-[#0F2942]">Definitive diagnosis</strong> requires <strong class="text-[#0D9488]">diagnostic laparoscopy with histopathologically confirmed biopsy</strong>.</li>
+                <li><strong class="text-[#0F2942]">Laparoscopic findings:</strong> Discrete peritoneal implants (<strong class="text-slate-800">red</strong>, <strong class="text-slate-800">puckered</strong>, <strong class="text-slate-800">black "matchstick" / "powder-burn"</strong> lesions, or <strong class="text-slate-800">white fibrous lesions</strong>), <strong class="text-slate-800">adhesions</strong>, and <strong class="text-slate-800">ovarian endometriomas</strong>.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Revised ASRM Surgical Staging</h4>
+              <ol class="list-decimal pl-5 space-y-1">
+                <li><strong class="text-[#0F2942]">Stage I (Minimal):</strong> Isolated implants; no significant adhesions.</li>
+                <li><strong class="text-[#0F2942]">Stage II (Mild):</strong> Superficial implants <strong class="text-slate-800">&lt; 5 cm in aggregate</strong> scattered on peritoneum and ovaries; no significant adhesions.</li>
+                <li><strong class="text-[#0F2942]">Stage III (Moderate):</strong> Multiple superficial and deeply invasive implants; peritubal and periovarian adhesions may be evident.</li>
+                <li><strong class="text-[#0F2942]">Stage IV (Severe):</strong> Multiple superficial and deep implants, including <strong class="text-slate-800">large ovarian endometriomas</strong>; filmy and dense adhesions usually present.</li>
+              </ol>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">Role of Presumptive (Non-Surgical) Diagnosis</h4>
+              <p class="text-slate-600 mb-1">When surgery is avoided, a presumptive diagnosis is established via symptoms, exam, and imaging through four accepted criteria:</p>
+              <ol class="list-decimal pl-5 space-y-1">
+                <li>Ultrasonography finding of an <strong class="text-slate-800">ovarian endometrioma</strong>.</li>
+                <li>Visual inspection of the <strong class="text-slate-800">posterior vaginal fornix</strong> and biopsy of rectovaginal lesions.</li>
+                <li><strong class="text-slate-800">Cystoscopy</strong> evaluation and biopsy of detrusor (bladder) lesions.</li>
+                <li>Physical exam findings of <strong class="text-slate-800">rectovaginal endometriosis confirmed with imaging</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 5,
+        partBadge: "Part I: Endometriosis",
+        title: "💊 Medical & Surgical Management (Pain vs. Infertility)",
+        examSummary: "Medical therapy relieves pain ONLY—it does NOT improve fertility. First-line pain options: NSAIDs, continuous COCs ('tricycle' for 3 months), and progestins (LNG-IUS/DMPA). GnRH agonists induce pseudomenopause and are strictly limited to <= 6 months due to osteoporosis. Conservative surgery (laparoscopic excision/ablation + endometrioma cystectomy) has up to 30% pain recurrence. For infertility: laparoscopic ablation (mild) or IVF/ART (moderate-severe).",
+        contentHTML: `
+          <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+            <p>Treatment is individualized based on <strong class="text-[#0F2942]">symptoms, lesion location, cost, desire for future fertility, and prior treatments</strong>. Because endometriosis is a <strong class="text-[#0F2942]">chronic, recurrent disorder throughout reproductive life</strong>, long-term strategies are required. <strong class="text-[#0F2942]">Expectant management</strong> is appropriate for mild symptoms or incidental asymptomatic diagnosis.</p>
+
+            <div class="rounded-xl bg-rose-50/80 border border-rose-200 p-3.5 text-xs sm:text-sm text-rose-950">
+              <strong class="font-bold text-rose-800">⚠️ Critical Rule:</strong> Medical therapy suppresses pain by inhibiting ovulation/estrogen, <strong class="font-semibold">NOT by curing the disease</strong>, and <strong class="font-semibold">does NOT improve fecundity/fertility</strong>.
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">A. Medical Therapy (For Pain Relief Only)</h4>
+              <ol class="list-decimal pl-5 space-y-2">
+                <li><strong class="text-[#0F2942]">NSAIDs:</strong> Nonselectively inhibit <strong class="text-slate-800">COX-1 and COX-2</strong>, blocking prostaglandin synthesis. Provides symptomatic pain relief only with no effect on disease progression.</li>
+                <li><strong class="text-[#0F2942]">Combined Oral Contraceptives (COCs):</strong> Mainstay therapy; inhibit gonadotropin release and reduce menstrual flow. Given <strong class="text-[#0D9488]">continuously for 3 months ("tricycle" regimen)</strong> without the usual 1-week pill-free interval.</li>
+                <li><strong class="text-[#0F2942]">Progestational Agents:</strong> Antagonize estrogen, causing initial <strong class="text-slate-800">decidualization</strong> followed by <strong class="text-slate-800">endometrial atrophy</strong>. Long-acting options—<strong class="text-slate-800">Depot Medroxyprogesterone Acetate (DMPA)</strong> and <strong class="text-slate-800">Levonorgestrel Intrauterine System (LNG-IUS / Mirena&reg;)</strong>—offer high compliance and effective long-term suppression, especially postoperatively.</li>
+                <li><strong class="text-[#0F2942]">Selective Progesterone Receptor Modulators (SPRMs):</strong> E.g., <strong class="text-slate-800">mifepristone</strong> (novel option).</li>
+                <li><strong class="text-[#0F2942]">Androgens (Danazol):</strong> Suppresses the mid-cycle <strong class="text-slate-800">LH surge</strong> (chronic anovulation), displaces testosterone from <strong class="text-slate-800">SHBG</strong> (raising free testosterone), and binds androgen/progesterone receptors. Induces a <strong class="text-slate-800">hypoestrogenic, hyperandrogenic</strong> state causing implant atrophy.</li>
+                <li><strong class="text-[#0F2942]">GnRH Agonists:</strong> Continuous, non-pulsatile administration causes <strong class="text-slate-800">pituitary desensitization</strong>, loss of ovarian steroidogenesis, and <strong class="text-slate-800">hypogonadotropic hypogonadism ("pseudomenopause")</strong>.
+                  <ul class="list-disc pl-5 mt-1 text-slate-600">
+                    <li><em>Administration:</em> Daily intranasal spray or subcutaneous slow-release depot (lasting &ge; 1 month).</li>
+                    <li><em>Duration limit:</em> <strong class="text-rose-700">Strictly &le; 6 months</strong> due to <strong class="text-slate-800">drug-induced osteoporosis</strong> and menopausal symptoms (hot flushes, night sweats). Symptoms rapidly recur upon stopping.</li>
+                  </ul>
+                </li>
+                <li><strong class="text-[#0F2942]">Aromatase Inhibitors:</strong> Block local estrogen synthesis inside endometriotic implants (which abnormally express aromatase to convert circulating androgens into estrogen).</li>
+              </ol>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">B. Surgical Management (For Pain)</h4>
+              <ol class="list-decimal pl-5 space-y-2">
+                <li><strong class="text-[#0F2942]">Conservative (Fertility-Sparing) Surgery:</strong>
+                  <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                    <li><strong class="text-slate-800">Laparoscopic excision or ablation</strong> (diathermy or laser vaporization) of peritoneal implants plus <strong class="text-slate-800">adhesiolysis</strong>.</li>
+                    <li><strong class="text-slate-800">Ovarian endometriomas:</strong> Simple drainage has high recurrence; <strong class="text-slate-800">excising or ablating the inner cyst lining (cystectomy)</strong> reduces recurrence, though it risks damaging functional ovarian reserve. <em>Exception:</em> Simple drainage alone may be considered as an adjunct immediately prior to fertility treatment to preserve ovarian tissue.</li>
+                    <li><strong class="text-slate-800">Deep infiltrating disease</strong> (involving bowel, bladder, ureter, or rectovaginal septum): Requires <strong class="text-slate-800">specialist endometriosis centers</strong> due to risks of bowel and urinary tract injury.</li>
+                    <li><strong class="text-slate-800">Postoperative recurrence:</strong> Pain recurs in <strong class="text-[#0D9488]">up to 30%</strong> of patients after conservative surgery, so <strong class="text-slate-800">concurrent long-term medical suppression</strong> is often started immediately post-op.</li>
+                  </ul>
+                </li>
+                <li><strong class="text-[#0F2942]">Definitive Surgery (Hysterectomy + Bilateral Salpingo-Oophorectomy):</strong>
+                  <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                    <li>Reserved for women who have <strong class="text-slate-800">completed childbearing</strong> and failed conservative therapies (removes the primary estrogen source and all visible implants).</li>
+                    <li>Patients must be counseled that surgery <strong class="text-slate-800">may not cure 100% of pain</strong>.</li>
+                    <li><strong class="text-slate-800">Post-op HRT:</strong> <strong class="text-[#0D9488]">Combined estrogen + progesterone HRT</strong> is preferred over estrogen-only HRT because unopposed estrogen can reactivate microscopic residual endometriosis, whereas progesterone inactivates endometrial glands and stroma.</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-[#0F2942] mb-1.5">C. Management of Endometriosis-Associated Infertility</h4>
+              <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-[#0F2942]">Medical ovulation-suppressing drugs:</strong> <strong class="text-rose-700">Ineffective</strong> for improving fertility.</li>
+                <li><strong class="text-[#0F2942]">Minimal-to-mild endometriosis:</strong> Laparoscopic surgical ablation/excision improves fertility.</li>
+                <li><strong class="text-[#0F2942]">Moderate-to-severe endometriosis:</strong> Surgery can restore pelvic anatomy and tubal function (though strong trial evidence is limited), or patients may proceed directly to <strong class="text-[#0D9488]">Assisted Reproductive Technology (ART)</strong>: controlled ovarian hyperstimulation, intrauterine insemination (IUI), or <strong class="text-[#0D9488]">in vitro fertilization (IVF)</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 6,
+        partBadge: "Part I: Endometriosis",
+        title: "🤰 Impact of Endometriosis on Pregnancy",
+        examSummary: "Symptoms typically improve during pregnancy due to progesterone-driven decidualization, but implants remain biologically active. Rare complications (intestinal perforation, hemoperitoneum, uroperitoneum, acute appendicitis, ruptured/infected endometrioma) occur via uterine traction on adhesions, tissue friability, and vessel wall erosion. NO extra routine prenatal monitoring is needed.",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Symptom improvement:</strong> Lesions and pain often improve or disappear during pregnancy due to <strong class="text-[#0D9488]">progesterone-driven decidualization</strong>.</li>
+            <li><strong class="text-[#0F2942]">Rare, life-threatening complications:</strong> Decidualized implants remain biologically active. Rare case reports describe <strong class="text-slate-800">intestinal perforation, hemoperitoneum, uroperitoneum, acute appendicitis, and ruptured or infected ovarian endometriomas</strong>.</li>
+            <li><strong class="text-[#0F2942]">Mechanisms of pregnancy complications:</strong>
+              <ol class="list-decimal pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Mechanical <strong class="text-slate-800">traction</strong> by the enlarging gravid uterus on pre-existing adhesions.</li>
+                <li>Increased <strong class="text-slate-800">friability</strong> of inflamed tissues.</li>
+                <li><strong class="text-slate-800">Vessel wall weakening/erosion</strong> (intrusion or retraction) by decidualized lesions.</li>
+              </ol>
+            </li>
+            <li><strong class="text-[#0F2942]">Obstetric management:</strong> Because these events are very rare overall, <strong class="text-[#0D9488]">no routine additional prenatal monitoring or interventions</strong> are recommended.</li>
+          </ul>
+        `
+      },
+      {
+        id: 7,
+        partBadge: "Part II: Adenomyosis",
+        title: "🌺 Adenomyosis: Definition, Epidemiology & Risk Factors",
+        examSummary: "Endometriosis interna: presence of endometrial glands and stroma deep within the myometrium. Found in ~40% of hysterectomy specimens. Classic demographic: multiparous women (~90%) in their 40s and 50s (~80%). Strongly associated with hyperestrogenic conditions: uterine fibroids (leiomyomas), endometriosis, and endometrial cancer.",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Definition:</strong> Presence of <strong class="text-[#0F2942]">endometrial glands and stroma deep within the myometrium</strong> (also termed <em>endometriosis interna</em>).</li>
+            <li><strong class="text-[#0F2942]">Pathophysiology:</strong> Ectopic intramyometrial endometrium responds to cyclical hormones, causing intramyometrial bleeding, surrounding smooth muscle hypertrophy/hyperplasia [added], increased endometrial vascularization (causing menorrhagia), and excess <strong class="text-slate-800">prostaglandin production</strong> (causing severe dysmenorrhea).</li>
+            <li><strong class="text-[#0F2942]">Epidemiology &amp; Risk Factors:</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1.5 text-slate-600">
+                <li>Identified in <strong class="text-[#0D9488]">~40%</strong> of hysterectomy specimens in reproductive-age women.</li>
+                <li><strong class="text-slate-800">Age:</strong> ~<strong class="text-[#0D9488]">80%</strong> develop in women in their <strong class="text-slate-800">40s and 50s</strong> (typically diagnosed in late 30s to early 40s).</li>
+                <li><strong class="text-slate-800">Parity:</strong> Nearly <strong class="text-[#0D9488]">90%</strong> occur in <strong class="text-slate-800">multiparous women</strong>.</li>
+                <li><strong class="text-slate-800">Coexisting hyperestrogenic conditions:</strong> Strongly associated with <strong class="text-slate-800">uterine leiomyomas (fibroids), endometriosis, and endometrial cancer</strong>.</li>
+              </ul>
+            </li>
+          </ul>
+        `
+      },
+      {
+        id: 8,
+        partBadge: "Part II: Adenomyosis",
+        title: "🩺 Adenomyosis: Clinical Features, Physical Exam & Imaging",
+        examSummary: "Classic triad: menorrhagia (HMB), progressively worsening secondary dysmenorrhea, and a uniformly (globally) enlarged, smooth, soft, 'boggy', tender uterus rarely exceeding 12 weeks' gestation (especially tender perimenstrually). TVS is preferred first-line imaging; Pelvic MRI is the imaging investigation of choice; definitive diagnosis requires post-hysterectomy histopathology.",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Classic Clinical Triad:</strong>
+              <ol class="list-decimal pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">Menorrhagia / Heavy Menstrual Bleeding (HMB)</strong> (due to abnormal/increased endometrial vascularization).</li>
+                <li><strong class="text-slate-800">Progressively worsening secondary dysmenorrhea</strong> (pain throughout menses due to increased prostaglandins).</li>
+                <li><strong class="text-slate-800">Uniformly enlarged, tender uterus</strong>.</li>
+              </ol>
+            </li>
+            <li><strong class="text-[#0F2942]">Physical Examination:</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">Global (uniform/symmetrical) uterine enlargement</strong>, rarely exceeding <strong class="text-[#0D9488]">12 weeks' gestation</strong>.</li>
+                <li><strong class="text-slate-800">Smooth, regular outer contour</strong> (unlike fibroids).</li>
+                <li><strong class="text-slate-800">Soft, "boggy," and tender</strong> uterine texture, especially when examined <strong class="text-slate-800">perimenstrually</strong>.</li>
+              </ul>
+            </li>
+            <li><strong class="text-[#0F2942]">Diagnostic Imaging &amp; Histology:</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">Transabdominal Ultrasound:</strong> Poor sensitivity for subtle myometrial changes.</li>
+                <li><strong class="text-slate-800">Transvaginal Ultrasound (TVS):</strong> Preferred first-line imaging; may show hemorrhage-filled, distended endometrial glands (or focal nodular adenomyomas mimicking fibroids).</li>
+                <li><strong class="text-slate-800">Pelvic MRI:</strong> <strong class="text-[#0D9488]">Imaging investigation of choice</strong> (especially in doubtful cases), providing superior visualization of the myometrium, junctional zone [added], and endometrium.</li>
+                <li><strong class="text-slate-800">Definitive Diagnosis:</strong> Established <strong class="text-[#0D9488]">only by histopathological examination</strong> of a hysterectomy specimen.</li>
+              </ul>
+            </li>
+          </ul>
+        `
+      },
+      {
+        id: 9,
+        partBadge: "Part II: Adenomyosis",
+        title: "💊 Management of Adenomyosis",
+        examSummary: "Principle: Any medical therapy inducing amenorrhea renders intramyometrial endometrium quiescent (NSAIDs, continuous OCPs, DMPA, LNG-IUS, short-term GnRH agonists), though symptoms rapidly return upon cessation. Hysterectomy is the ONLY definitive cure (conservative focal excision is poorly developed due to diffuse disease).",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Principle:</strong> Any medical therapy that induces <strong class="text-[#0D9488]">amenorrhea</strong> renders the ectopic endometrium quiescent, relieving HMB and dysmenorrhea.</li>
+            <li><strong class="text-[#0F2942]">Medical Options (Temporizing):</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">NSAIDs</strong> (for prostaglandin-mediated pain).</li>
+                <li><strong class="text-slate-800">Continuous OCPs</strong>.</li>
+                <li><strong class="text-slate-800">Progestins / Long-Acting Reversible Contraceptives:</strong> <strong class="text-slate-800">DMPA</strong> or <strong class="text-slate-800">LNG-IUS</strong>.</li>
+                <li><strong class="text-slate-800">Short-term GnRH agonists</strong>.</li>
+                <li><em>Limitation:</em> Symptoms <strong class="text-rose-700">rapidly return</strong> in the majority of patients upon stopping medical therapy.</li>
+              </ul>
+            </li>
+            <li><strong class="text-[#0F2942]">Surgical Treatment:</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-[#0D9488]">Hysterectomy is the ONLY definitive cure</strong>. Conservative focal excision is poorly developed because adenomyosis is typically diffuse and hard to delineate preoperatively.</li>
+              </ul>
+            </li>
+          </ul>
+        `
+      },
+      {
+        id: 10,
+        partBadge: "High-Yield Exam Synthesis",
+        title: "🚫 Do Not Confuse",
+        examSummary: "Key exam triad differentiation: Adenomyosis (multiparous 40s, soft/boggy/tender, smooth global enlargement <= 12 weeks) vs. Leiomyoma/Fibroid (hard/firm, irregular/lobulated enlargement up to 25 weeks, non-tender) vs. Endometriosis Externa (young/infertile, normal-sized fixed retroverted uterus, uterosacral nodules).",
+        contentHTML: `
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-[#0F2942] text-white">
+                  <th class="py-2.5 px-3 font-semibold">Clinical Feature</th>
+                  <th class="py-2.5 px-3 font-semibold">Adenomyosis</th>
+                  <th class="py-2.5 px-3 font-semibold">Uterine Leiomyoma (Fibroid)</th>
+                  <th class="py-2.5 px-3 font-semibold">Endometriosis (Externa)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-[#0F2942]">Typical Patient</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Multiparous</strong>, late 30s–50s</td>
+                  <td class="py-2.5 px-3 text-slate-700">Reproductive age (often nulliparous/late reproductive) [added]</td>
+                  <td class="py-2.5 px-3 text-slate-700">Reproductive age, often <strong class="text-slate-900">nulliparous / infertile</strong> (30–40%)</td>
+                </tr>
+                <tr class="bg-slate-50/60">
+                  <td class="py-2.5 px-3 font-semibold text-[#0F2942]">Uterine Size</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-[#0D9488]">Rarely exceeds 12 weeks</strong></td>
+                  <td class="py-2.5 px-3 text-slate-700">Can grow very large (<strong class="text-slate-900">up to 25 weeks</strong>)</td>
+                  <td class="py-2.5 px-3 text-slate-700">Normal size (unless coexisting adenomyosis/fibroids) [added]</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-[#0F2942]">Uterine Shape &amp; Contour</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Global, symmetrical, smooth</strong> enlargement</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Irregular, asymmetrical, lobulated</strong> enlargement</td>
+                  <td class="py-2.5 px-3 text-slate-700">Retroverted, <strong class="text-slate-900">fixed</strong>, laterally displaced</td>
+                </tr>
+                <tr class="bg-slate-50/60">
+                  <td class="py-2.5 px-3 font-semibold text-[#0F2942]">Uterine Consistency</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-[#0D9488]">Soft, "boggy," tender</strong> (especially perimenstrually)</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Firm / hard</strong>, usually non-tender (unless degenerating)</td>
+                  <td class="py-2.5 px-3 text-slate-700">Tender uterosacral nodules; adnexal endometrioma</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-[#0F2942]">Definitive Diagnosis</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Histopathology post-hysterectomy</strong></td>
+                  <td class="py-2.5 px-3 text-slate-700">Ultrasound (usually sufficient clinically)</td>
+                  <td class="py-2.5 px-3 text-slate-700"><strong class="text-slate-900">Diagnostic laparoscopy + biopsy</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: 11,
+        partBadge: "High-Yield Exam Synthesis",
+        title: "⚠️ Exam Pitfalls",
+        examSummary: "Top 7 traps: (1) Stage does NOT correlate with pain; (2) Never give hormonal suppression for infertility; (3) Limit GnRH agonists to <= 6 months (osteoporosis); (4) Never use CA-125 for diagnosis; (5) Use combined E+P HRT (not E-only) after hysterectomy + BSO; (6) Perform cystectomy (not simple drainage) for endometriomas; (7) No extra prenatal scans in pregnancy.",
+        contentHTML: `
+          <ol class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-decimal pl-5">
+            <li><strong class="text-rose-700">Assuming Laparoscopic Stage Correlates with Pain Severity:</strong> False! Extensive Stage IV disease with large endometriomas can be minimally painful, whereas small, deeply infiltrating rectovaginal implants can cause excruciating pain.</li>
+            <li><strong class="text-rose-700">Prescribing Medical Therapy (COCs, GnRH agonists, Danazol) for Endometriosis-Related Infertility:</strong> Hormonal suppression induces anovulation/amenorrhea—it <strong class="text-slate-900">treats pain only</strong> and <strong class="text-slate-900">delays conception without improving fecundity</strong>.</li>
+            <li><strong class="text-rose-700">Continuing GnRH Agonists Beyond 6 Months:</strong> Unopposed GnRH agonist therapy for &gt; 6 months causes significant <strong class="text-slate-900">bone mineral density loss (osteoporosis)</strong> and severe vasomotor symptoms.</li>
+            <li><strong class="text-rose-700">Relying on Serum CA-125 to Diagnose Endometriosis:</strong> CA-125 lacks specificity (elevated in normal menstruation, fibroids, PID, and ovarian/endometrial cancers) and must <strong class="text-slate-900">not</strong> be used as a diagnostic test.</li>
+            <li><strong class="text-rose-700">Giving Estrogen-Only HRT After Hysterectomy + BSO for Severe Endometriosis:</strong> Unopposed estrogen can reactivate residual microscopic endometriotic implants; always use <strong class="text-slate-900">combined estrogen + progestin HRT</strong>.</li>
+            <li><strong class="text-rose-700">Simply Draining an Ovarian Endometrioma During Pain Surgery:</strong> Simple cyst drainage has a very high recurrence rate; <strong class="text-slate-900">cystectomy (excising/ablating the cyst wall)</strong> is required unless preserving ovarian reserve immediately before IVF.</li>
+            <li><strong class="text-rose-700">Ordering Extra Prenatal Scans for Pregnant Patients with Endometriosis:</strong> Although rare catastrophic complications (bowel perforation, hemoperitoneum) can occur, routine pregnancies with endometriosis <strong class="text-slate-900">do not</strong> require extra surveillance.</li>
+          </ol>
+        `
+      },
+      {
+        id: 12,
+        partBadge: "High-Yield Exam Synthesis",
+        title: "🎯 Main Examiner-Focused Ideas",
+        examSummary: "Master the imaging hierarchy (TVS first-line -> MRI for deep disease/doubtful adenomyosis -> Laparoscopy + biopsy / Hysterectomy histology for gold standard), classic premenstrual pain timing (1–2 days before menses), pain vs. fertility treatment split, and the multiparous 40s adenomyosis profile.",
+        contentHTML: `
+          <ul class="space-y-2.5 text-sm text-slate-700 leading-relaxed list-disc pl-5">
+            <li><strong class="text-[#0F2942]">Endometriosis Gold Standard vs. First-Line Imaging:</strong> <strong class="text-[#0D9488]">TVS</strong> is first-line to identify ovarian endometriomas (fine internal echoes / "chocolate cyst"), <strong class="text-[#0D9488]">MRI</strong> maps deep infiltrating pelvic disease, and <strong class="text-[#0D9488]">laparoscopy + biopsy</strong> is the gold standard for definitive diagnosis.</li>
+            <li><strong class="text-[#0F2942]">Classic Endometriosis Pain Timing:</strong> Non-colicky pain starting <strong class="text-slate-900">1–2 days before menses</strong> and ending when menstruation finishes, paired with <strong class="text-slate-900">deep dyspareunia</strong> and <strong class="text-slate-900">dyschezia</strong>.</li>
+            <li><strong class="text-[#0F2942]">Endometriosis Management Split (Pain vs. Fertility):</strong>
+              <ul class="list-circle pl-5 mt-1 space-y-1 text-slate-600">
+                <li><em>Pain:</em> Continuous COCs (tricycle), progestins (LNG-IUS/DMPA), NSAIDs, short-term GnRH agonists (&le; 6 months), or laparoscopic excision/ablation.</li>
+                <li><em>Infertility:</em> Laparoscopic ablation for minimal/mild disease; surgery to restore anatomy or <strong class="text-slate-800">IVF/ART</strong> for moderate/severe disease.</li>
+              </ul>
+            </li>
+            <li><strong class="text-[#0F2942]">Adenomyosis Classic Profile:</strong> <strong class="text-slate-900">Multiparous woman in her 40s</strong> with <strong class="text-slate-900">HMB + worsening secondary dysmenorrhea</strong> and a <strong class="text-slate-900">soft, boggy, tender, symmetrically enlarged uterus &le; 12 weeks</strong>.</li>
+            <li><strong class="text-[#0F2942]">Adenomyosis Imaging &amp; Cure:</strong> <strong class="text-[#0D9488]">MRI</strong> is the imaging modality of choice (TVS is first-line); <strong class="text-[#0D9488]">hysterectomy</strong> is the sole definitive treatment, while medical therapy only temporarily suppresses symptoms.</li>
+          </ul>
+        `
+      },
+      {
+        id: 13,
+        partBadge: "High-Yield Exam Synthesis",
+        title: "🧠 Compact Thinking Framework",
+        examSummary: "3-Step Board Algorithm: (1) Check parity, age & uterine exam (nulliparous/fixed retroverted -> Endometriosis; multiparous 40s/soft boggy <=12w -> Adenomyosis; irregular hard up to 25w -> Fibroids); (2) Image with TVS first, then MRI; (3) Match therapy to patient's primary goal (pain suppression vs. conception).",
+        contentHTML: `
+          <p class="text-sm text-slate-600 mb-3">When approaching any clinical vignette of chronic/cyclical pelvic pain or abnormal uterine bleeding:</p>
+          <ol class="space-y-3 text-sm text-slate-700 leading-relaxed list-decimal pl-5">
+            <li>
+              <strong class="text-[#0F2942]">Step 1 — Check Parity, Age &amp; Uterine Exam:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li><em>Young/nulliparous + infertile + normal-sized fixed retroverted uterus + uterosacral nodules</em> &rarr; Think <strong class="text-[#0D9488]">Endometriosis</strong>.</li>
+                <li><em>Multiparous + 40s + HMB + uniformly enlarged, soft, boggy, tender uterus (&le; 12 weeks)</em> &rarr; Think <strong class="text-[#0D9488]">Adenomyosis</strong>.</li>
+                <li><em>Irregular, hard, lobulated, non-tender uterus (up to 25 weeks)</em> &rarr; Think <strong class="text-[#0D9488]">Uterine Fibroids</strong>.</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-[#0F2942]">Step 2 — Select Targeted Imaging:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li>Start with <strong class="text-slate-800">Transvaginal Ultrasound (TVS)</strong> (looks for endometrioma "ground-glass" cysts or myometrial glandular cysts).</li>
+                <li>Escalate to <strong class="text-slate-800">Pelvic MRI</strong> for suspected deep infiltrating endometriosis (rectovaginal/bowel) or doubtful adenomyosis.</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-[#0F2942]">Step 3 — Match Treatment to the Patient's Primary Goal:</strong>
+              <ul class="list-disc pl-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">Endometriosis + Wants Pregnancy:</strong> Never use hormonal suppression; offer laparoscopic ablation (mild) or <strong class="text-[#0D9488]">IVF</strong> (severe).</li>
+                <li><strong class="text-slate-800">Endometriosis + Wants Pain Relief:</strong> Start NSAIDs + continuous COCs or LNG-IUS &rarr; GnRH agonist (&le; 6 months) &rarr; laparoscopic excision &rarr; hysterectomy + BSO (+ combined HRT) if family complete.</li>
+                <li><strong class="text-slate-800">Adenomyosis:</strong> Induce amenorrhea (LNG-IUS, continuous COCs, DMPA) if preserving uterus; perform <strong class="text-[#0D9488]">hysterectomy</strong> for definitive cure.</li>
+              </ul>
+            </li>
+          </ol>
+        `
+      },
+      {
+        id: 14,
+        partBadge: "High-Yield Exam Synthesis",
+        title: "✅ Key Takeaway",
+        examSummary: "Endometriosis (outside uterus; young/infertile; premenstrual pain + uterosacral nodules + chocolate cysts; diagnosed via laparoscopy + biopsy) and Adenomyosis (inside myometrium; multiparous 40s; HMB + soft boggy uterus <= 12w; cured only by hysterectomy) are both estrogen-dependent disorders whose management depends strictly on fertility desires.",
+        contentHTML: `
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-800 leading-relaxed">
+            <strong class="text-[#0F2942]">Endometriosis</strong> and <strong class="text-[#0F2942]">adenomyosis</strong> are benign, estrogen-dependent disorders caused by ectopic endometrial glands and stroma—located outside the uterus in endometriosis (typically affecting young, infertile women with premenstrual-onset pelvic pain, deep dyspareunia, uterosacral nodularity, and ovarian "chocolate cysts") and deep within the myometrium in adenomyosis (typically affecting multiparous women in their 40s with heavy menstrual bleeding, worsening dysmenorrhea, and a globally enlarged, soft, boggy uterus &le; 12 weeks). While TVS and MRI guide non-invasive evaluation, definitive diagnosis relies on laparoscopy with biopsy for endometriosis and post-hysterectomy histopathology for adenomyosis. Management hinges on fertility goals: hormonal therapies relieve pain by inducing amenorrhea or pseudomenopause without improving fertility, whereas conservative laparoscopy or ART addresses endometriosis-related infertility, and hysterectomy provides the ultimate definitive cure when childbearing is complete.
+          </div>
+        `
+      }
+    ];
+
+    // =========================================================================
+    // 2. AMBOSS-STYLE QBank DATA (28 HIGH-YIELD MCQs: 2 PER SECTION)
+    // =========================================================================
+    const MCQ_DATA = [
+      // Section 1
+      {
+        id: 1,
+        sectionId: 1,
+        stem: "A 29-year-old nulligravid woman undergoes diagnostic laparoscopy for chronic cyclical pelvic pain and primary infertility. Which anatomical structure is the single most common site of endometriotic implantation?",
+        options: [
+          "A. Rectovaginal septum",
+          "B. Uterosacral ligaments and pelvic peritoneum",
+          "C. Urinary bladder dome",
+          "D. Umbilicus",
+          "E. Pleural cavity"
+        ],
+        correctIndex: 1,
+        explanation: "Endometriosis is most commonly found on the pelvic peritoneum, particularly on the uterosacral ligaments (followed by the ovaries). The rectovaginal septum, bladder, umbilicus, and pleura are less common or rare extrapelvic sites."
+      },
+      {
+        id: 2,
+        sectionId: 1,
+        stem: "A 31-year-old woman presents with 2 years of primary infertility and dysmenorrhea. Based on epidemiologic data, approximately what percentage of women with infertility have endometriosis?",
+        options: [
+          "A. 2%–5%",
+          "B. 10%",
+          "C. 30%–40%",
+          "D. 65%–75%",
+          "E. > 90%"
+        ],
+        correctIndex: 2,
+        explanation: "Endometriosis affects ~10% of reproductive-age women overall, but its prevalence rises to 30%–40% among women presenting with infertility (with ~10% of those having deep infiltrating disease)."
+      },
+      // Section 2
+      {
+        id: 3,
+        sectionId: 2,
+        stem: "A 33-year-old woman develops a painful, cyclical bleeding nodule in her Pfannenstiel cesarean section scar 18 months after delivery. Which theory of endometriosis pathogenesis is directly supported by this finding?",
+        options: [
+          "A. Meyer's coelomic metaplasia theory",
+          "B. Sampson's implantation theory",
+          "C. Vascular and lymphatic embolization theory",
+          "D. Congenital Müllerian duct agenesis",
+          "E. Autoimmune complement activation"
+        ],
+        correctIndex: 1,
+        explanation: "Sampson's implantation theory postulates retrograde menstrual regurgitation and direct mechanical implantation of viable endometrial tissue—strongly supported by endometrial implants developing in human surgical scars after cesarean section or perineal repair."
+      },
+      {
+        id: 4,
+        sectionId: 2,
+        stem: "A 27-year-old woman presents with recurrent right-sided pneumothorax occurring consistently within 24 hours of the onset of menstruation (catamenial pneumothorax). Which pathogenic mechanism best explains endometriotic lesions at this distant site?",
+        options: [
+          "A. Direct transcervical migration",
+          "B. Vascular and lymphatic spread",
+          "C. Mesonephric duct persistence",
+          "D. Ovarian hyperstimulation",
+          "E. Prostaglandin-induced luteolysis"
+        ],
+        correctIndex: 1,
+        explanation: "Vascular and lymphatic embolization of endometrial cells to distant organs explains rare extraperitoneal implants outside the peritoneal cavity, such as in the lungs/pleura."
+      },
+      // Section 3
+      {
+        id: 5,
+        sectionId: 3,
+        stem: "A 26-year-old woman reports severe, gradual-onset, non-colicky pelvic pain that consistently begins 2 days before menstruation starts and resolves completely when her bleeding stops, accompanied by deep dyspareunia. Involvement of which structure most specifically explains her deep dyspareunia?",
+        options: [
+          "A. Anterior abdominal wall",
+          "B. Pouch of Douglas (posterior cul-de-sac)",
+          "C. Right hemidiaphragm",
+          "D. Ureteropelvic junction",
+          "E. Bartholin gland"
+        ],
+        correctIndex: 1,
+        explanation: "Classical endometriosis pain starts 1–2 days before menses and resolves at the end of menses. Deep pain with intercourse (deep dyspareunia) strongly indicates implants in the pouch of Douglas or uterosacral ligaments."
+      },
+      {
+        id: 6,
+        sectionId: 3,
+        stem: "A 30-year-old woman with stage I superficial endometriosis reports excruciating pelvic pain, whereas her sister with stage IV endometriosis and large bilateral ovarian endometriomas reports minimal discomfort. Which principle explains this discrepancy?",
+        options: [
+          "A. Pain intensity correlates with serum CA-125 levels",
+          "B. Pain severity correlates with depth of tissue invasion rather than visible surface extent",
+          "C. Bilateral endometriomas secrete endogenous endorphins",
+          "D. Superficial lesions produce more fibrosis than deep lesions",
+          "E. Stage IV disease represents postmenopausal regression"
+        ],
+        correctIndex: 1,
+        explanation: "There is a well-established lack of correlation between the extent of visible laparoscopic disease and symptom intensity; instead, pain correlates with the depth of tissue invasion."
+      },
+      // Section 4
+      {
+        id: 7,
+        sectionId: 4,
+        stem: "A 28-year-old woman with cyclical pelvic pain undergoes transvaginal ultrasound, which shows a 5-cm smooth-walled ovarian cyst filled with diffuse, homogeneous fine internal echoes and hyperechoic mural foci. What is the most likely diagnosis?",
+        options: [
+          "A. Corpus luteum hemorrhagic cyst",
+          "B. Ovarian endometrioma ('chocolate cyst')",
+          "C. Serous cystadenocarcinoma",
+          "D. Hydrosalpinx",
+          "E. Subserosal leiomyoma"
+        ],
+        correctIndex: 1,
+        explanation: "On transvaginal ultrasound (TVS), ovarian endometriomas classically appear as smooth-walled cystic masses containing diffuse, fine internal echoes ('ground-glass' appearance) and hyperechoic mural foci."
+      },
+      {
+        id: 8,
+        sectionId: 4,
+        stem: "A 32-year-old woman presents with dyschezia, deep dyspareunia, and a tender nodule palpated in the rectovaginal septum. Which non-invasive imaging modality is best suited to map deep infiltrating lesions prior to complex surgery?",
+        options: [
+          "A. Transabdominal ultrasound",
+          "B. Hysterosalpingography (HSG)",
+          "C. Pelvic MRI",
+          "D. Plain abdominal radiograph",
+          "E. Serum CA-125 assay"
+        ],
+        correctIndex: 2,
+        explanation: "While TVS is first-line for ovarian endometriomas, Pelvic MRI is superior for detecting deep infiltrating endometriosis in the rectovaginal septum, pouch of Douglas, and rectosigmoid colon for presurgical planning."
+      },
+      // Section 5
+      {
+        id: 9,
+        sectionId: 5,
+        stem: "A 25-year-old woman with laparoscopically confirmed endometriosis is started on a depot GnRH agonist for severe refractory pelvic pain. Why must this therapy strictly be limited to no more than 6 months?",
+        options: [
+          "A. Risk of irreversible ovarian hyperstimulation",
+          "B. Drug-induced osteoporosis and severe hypoestrogenic symptoms",
+          "C. High risk of endometrial carcinoma",
+          "D. Hepatotoxicity and cholestatic jaundice",
+          "E. Virilization and irreversible voice deepening"
+        ],
+        correctIndex: 1,
+        explanation: "Continuous GnRH agonist therapy induces a 'pseudomenopause' (hypogonadotropic hypogonadism); use beyond 6 months is precluded due to drug-induced osteoporosis and menopausal vasomotor symptoms (hot flushes, night sweats)."
+      },
+      {
+        id: 10,
+        sectionId: 5,
+        stem: "A 31-year-old woman with stage II endometriosis desires immediate pregnancy and asks for medication to shrink her implants before trying to conceive. What is the most appropriate clinical advice?",
+        options: [
+          "A. Start continuous COCs for 6 months to boost fecundity",
+          "B. Administer danazol for 3 months to improve ovulation",
+          "C. Medical hormonal therapy treats pain only and does NOT improve fertility",
+          "D. Prescribe depot medroxyprogesterone acetate (DMPA)",
+          "E. Start an aromatase inhibitor for 6 months prior to conception"
+        ],
+        correctIndex: 2,
+        explanation: "Medical ovulation-suppressing therapy treats endometriosis-related pain only and has NOT been shown to improve fecundity. For minimal-to-mild endometriosis with infertility, laparoscopic surgical ablation/excision is beneficial."
+      },
+      // Section 6
+      {
+        id: 11,
+        sectionId: 6,
+        stem: "A 30-year-old primigravida at 14 weeks' gestation has a history of stage III endometriosis and asks if she needs serial ultrasounds or MRI scans to monitor her implants during pregnancy. What is the best recommendation?",
+        options: [
+          "A. Monthly pelvic MRI scans until delivery",
+          "B. Biweekly CA-125 monitoring",
+          "C. No routine additional prenatal monitoring or interventions are recommended",
+          "D. Prophylactic laparoscopic excision at 20 weeks",
+          "E. Scheduled cesarean delivery at 36 weeks"
+        ],
+        correctIndex: 2,
+        explanation: "Endometriosis symptoms usually improve during pregnancy due to progesterone-driven decidualization. Although rare complications (bowel perforation, hemoperitoneum) are reported, they are exceedingly rare overall, so no additional prenatal monitoring is recommended."
+      },
+      {
+        id: 12,
+        sectionId: 6,
+        stem: "A pregnant woman at 28 weeks' gestation with known deep pelvic endometriosis develops acute spontaneous hemoperitoneum. Which mechanism contributes to this rare pregnancy complication?",
+        options: [
+          "A. Estrogen-driven malignant transformation",
+          "B. Uterine traction on adhesions and vessel wall erosion by decidualized lesions",
+          "C. Placental abruption from progesterone deficiency",
+          "D. Torsion of a subserosal fibroid",
+          "E. Cervical incompetence"
+        ],
+        correctIndex: 1,
+        explanation: "Decidualized endometriotic lesions remain biologically active during pregnancy and can cause rare complications via traction by the growing uterus on adhesions, increased tissue friability, and vessel wall intrusion/retraction."
+      },
+      // Section 7
+      {
+        id: 13,
+        sectionId: 7,
+        stem: "A 44-year-old G4P4 woman undergoes hysterectomy for refractory menorrhagia and dysmenorrhea. Histopathology reveals endometrial glands and stroma located deep within the myometrium. Which demographic factor is most strongly associated with this condition?",
+        options: [
+          "A. Nulliparity and age < 25 years",
+          "B. Multiparity and age in the 40s–50s",
+          "C. Postmenopausal status without HRT",
+          "D. History of Turner syndrome",
+          "E. Primary amenorrhea"
+        ],
+        correctIndex: 1,
+        explanation: "Adenomyosis (endometriosis interna) occurs in ~90% of cases in multiparous women and develops in ~80% of cases in women in their 40s and 50s."
+      },
+      {
+        id: 14,
+        sectionId: 7,
+        stem: "Adenomyosis frequently coexists with other gynecologic pathologies driven by high local tissue estrogen exposure. Which triad of conditions is most strongly associated with adenomyosis?",
+        options: [
+          "A. PCOS, dermoid cysts, and cervical dysplasia",
+          "B. Uterine leiomyomas (fibroids), endometriosis, and endometrial cancer",
+          "C. Hydatidiform mole, choriocarcinoma, and theca lutein cysts",
+          "D. Asherman syndrome, Sheehan syndrome, and premature ovarian failure",
+          "E. Bartholin abscess, lichen sclerosus, and vulvar carcinoma"
+        ],
+        correctIndex: 1,
+        explanation: "Adenomyosis is associated with other pathologies affected by high tissue estrogen levels, specifically uterine leiomyomas (fibroids), endometriosis, and endometrial cancer."
+      },
+      // Section 8
+      {
+        id: 15,
+        sectionId: 8,
+        stem: "A 42-year-old multiparous woman presents with heavy menstrual bleeding and progressively worsening dysmenorrhea. Bimanual exam during menses reveals a uniformly enlarged, smooth-contoured, soft, 'boggy,' and tender uterus corresponding to 10 weeks' gestation. What is the imaging investigation of choice?",
+        options: [
+          "A. Transabdominal ultrasound",
+          "B. Pelvic MRI",
+          "C. CT scan of the pelvis",
+          "D. Hysterosalpingography",
+          "E. Saline infusion sonohysterography"
+        ],
+        correctIndex: 1,
+        explanation: "While transvaginal ultrasound (TVS) is preferred for initial screening, Pelvic MRI is the imaging investigation of choice for adenomyosis because it provides superior visualization of the myometrium, junctional zone, and endometrium."
+      },
+      {
+        id: 16,
+        sectionId: 8,
+        stem: "How is a definitive diagnosis of adenomyosis formally established?",
+        options: [
+          "A. Elevated serum CA-125 > 100 U/mL",
+          "B. Diagnostic laparoscopy with peritoneal biopsy",
+          "C. Histopathological examination of a hysterectomy specimen",
+          "D. Endometrial pipelle biopsy in the office",
+          "E. Transabdominal pelvic ultrasound"
+        ],
+        correctIndex: 2,
+        explanation: "Adenomyosis can be diagnosed definitively only following histopathological examination of a hysterectomy specimen (where it is identified in ~40% of uteri from reproductive-age women)."
+      },
+      // Section 9
+      {
+        id: 17,
+        sectionId: 9,
+        stem: "A 45-year-old multiparous woman with symptomatic adenomyosis has completed childbearing and desires a permanent, definitive cure for her debilitating menorrhagia and dysmenorrhea. What is the only definitive treatment?",
+        options: [
+          "A. Levonorgestrel intrauterine system (LNG-IUS)",
+          "B. Continuous combined oral contraceptives",
+          "C. Hysterectomy",
+          "D. 6-month course of a GnRH agonist",
+          "E. Laparoscopic uterine nerve ablation"
+        ],
+        correctIndex: 2,
+        explanation: "While amenorrhea-inducing medical therapies (LNG-IUS, continuous OCPs, DMPA, short-term GnRH agonists) temporarily relieve symptoms, symptoms rapidly return upon cessation; hysterectomy is the ONLY definitive cure."
+      },
+      {
+        id: 18,
+        sectionId: 9,
+        stem: "A 38-year-old woman with adenomyosis wishes to avoid major surgery for the next 3 years. Which medical mechanism best explains how an LNG-IUS or depot medroxyprogesterone acetate (DMPA) relieves her symptoms?",
+        options: [
+          "A. Induces amenorrhea and renders intramyometrial endometrium quiescent",
+          "B. Permanently ablates the myometrial junctional zone",
+          "C. Stimulates endogenous LH surges",
+          "D. Causes osmotic shrinkage of smooth muscle tumors",
+          "E. Increases endometrial prostaglandin synthesis"
+        ],
+        correctIndex: 0,
+        explanation: "Any medical treatment that induces amenorrhea (such as progestin-containing LARCs like LNG-IUS or DMPA) renders the ectopic intramyometrial endometrium quiescent, relieving pain and heavy bleeding while therapy continues."
+      },
+      // Section 10
+      {
+        id: 19,
+        sectionId: 10,
+        stem: "During pelvic examination, a 43-year-old woman is found to have an enlarged uterus corresponding to 20 weeks' gestation with an irregular, firm, lobulated, non-tender contour. Which diagnosis is most consistent with these physical findings?",
+        options: [
+          "A. Adenomyosis",
+          "B. Uterine leiomyoma (fibroid)",
+          "C. Superficial peritoneal endometriosis",
+          "D. Acute endometritis",
+          "E. Ectopic pregnancy"
+        ],
+        correctIndex: 1,
+        explanation: "Uterine fibroids cause an irregular, asymmetrical, lobulated, firm/hard enlargement that can reach up to 25 weeks' size—in contrast to adenomyosis, which causes a smooth, global, soft/boggy enlargement rarely exceeding 12 weeks."
+      },
+      {
+        id: 20,
+        sectionId: 10,
+        stem: "Which physical exam finding best distinguishes adenomyosis from uterine fibroids in a 41-year-old woman presenting with heavy menstrual bleeding?",
+        options: [
+          "A. Uterine size reaching the umbilicus (20 weeks)",
+          "B. Hard, irregular, asymmetric uterine nodules",
+          "C. Smooth, global uterine enlargement <= 12 weeks with a soft, 'boggy,' tender consistency",
+          "D. Fixed retroverted uterus with uterosacral nodularity",
+          "E. Normal-sized uterus with a 6-cm adnexal mass"
+        ],
+        correctIndex: 2,
+        explanation: "Adenomyosis classically produces a global, symmetrical, smooth uterine enlargement rarely exceeding 12 weeks' gestation with a soft, 'boggy,' and tender texture (especially perimenstrually)."
+      },
+      // Section 11
+      {
+        id: 21,
+        sectionId: 11,
+        stem: "A 46-year-old woman undergoes total abdominal hysterectomy and bilateral salpingo-oophorectomy (TAH-BSO) for severe, refractory deep infiltrating endometriosis. She develops severe hot flushes postoperatively. Which hormone replacement regimen is recommended?",
+        options: [
+          "A. Unopposed oral estrogen-only HRT",
+          "B. Combined estrogen and progesterone HRT",
+          "C. High-dose danazol therapy",
+          "D. Transdermal testosterone patch",
+          "E. HRT is strictly contraindicated forever"
+        ],
+        correctIndex: 1,
+        explanation: "Combined estrogen + progesterone HRT is preferred over estrogen-only HRT after TAH-BSO for severe endometriosis because unopposed estrogen can reactivate residual microscopic implants, whereas progesterone inactivates endometrial glands and stroma."
+      },
+      {
+        id: 22,
+        sectionId: 11,
+        stem: "A 29-year-old woman not currently seeking pregnancy undergoes laparoscopy for a painful 5-cm ovarian endometrioma. Simply aspirating/draining the cyst fluid without removing the cyst wall is discouraged because it leads to:",
+        options: [
+          "A. Immediate premature menopause",
+          "B. A very high rate of cyst recurrence",
+          "C. Malignant transformation into clear cell carcinoma",
+          "D. Ureteral stricture",
+          "E. Asherman syndrome"
+        ],
+        correctIndex: 1,
+        explanation: "Endometriotic cysts should not merely be drained; excising or ablating the inner cyst lining (cystectomy) significantly reduces recurrence (simple drainage is reserved only as an immediate adjunct before IVF to preserve ovarian tissue)."
+      },
+      // Section 12
+      {
+        id: 23,
+        sectionId: 12,
+        stem: "A 27-year-old woman with cyclical pelvic pain is prescribed combined oral contraceptives (COCs) as first-line medical therapy. How are COCs ideally administered for endometriosis-related pain?",
+        options: [
+          "A. Only during the 5 days of menstruation",
+          "B. Continuously for 3 months ('tricycle' regimen) without a pill-free week",
+          "C. On alternate days during the follicular phase only",
+          "D. Combined with a GnRH agonist for 24 months",
+          "E. For 1 cycle followed by 3 months off"
+        ],
+        correctIndex: 1,
+        explanation: "COCs are a mainstay for endometriosis pain and are given continuously for 3 months ('tricycle' regimen) without the standard 1-week pill-free interval to suppress menstruation and gonadotropin release."
+      },
+      {
+        id: 24,
+        sectionId: 12,
+        stem: "After conservative laparoscopic excision and ablation of peritoneal endometriosis for chronic pelvic pain, approximately what proportion of patients experience recurrence of pain symptoms?",
+        options: [
+          "A. < 2%",
+          "B. 5%",
+          "C. Up to 30%",
+          "D. 75%",
+          "E. 95%"
+        ],
+        correctIndex: 2,
+        explanation: "Pain recurs in up to 30% of patients following conservative surgery, which is why concurrent long-term medical suppression (e.g., LNG-IUS or continuous COCs) is often initiated immediately postoperatively."
+      },
+      // Section 13
+      {
+        id: 25,
+        sectionId: 13,
+        stem: "A 33-year-old nulliparous woman with stage IV endometriosis and bilateral tubal adhesions desires pregnancy. Which management pathway offers the highest likelihood of achieving pregnancy?",
+        options: [
+          "A. 6 months of leuprolide (GnRH agonist) followed by expectant management",
+          "B. Continuous COCs for 12 months",
+          "C. In vitro fertilization (IVF) / Assisted Reproductive Technology (ART)",
+          "D. Danazol therapy for 6 months",
+          "E. Levonorgestrel IUS placement for 1 year"
+        ],
+        correctIndex: 2,
+        explanation: "In moderate-to-severe endometriosis with infertility, medical hormonal suppression is ineffective; patients are candidates for fertility treatments such as controlled ovarian hyperstimulation, IUI, or in vitro fertilization (IVF)."
+      },
+      {
+        id: 26,
+        sectionId: 13,
+        stem: "A 41-year-old G3P3 woman presents with heavy menstrual bleeding and severe dysmenorrhea. TVS suggests possible adenomyosis, and exam shows a smooth, tender 11-week uterus. If she wishes to preserve her uterus for future childbearing, what is the best next step?",
+        options: [
+          "A. Total hysterectomy",
+          "B. Endometrial ablation",
+          "C. Temporary medical suppression (e.g., NSAIDs, COCs, or short-term progestin) until ready to conceive",
+          "D. Uterine artery embolization",
+          "E. Bilateral oophorectomy"
+        ],
+        correctIndex: 2,
+        explanation: "Hysterectomy is definitive but eliminates fertility; for women with adenomyosis wishing to preserve fertility, temporizing medical therapy (NSAIDs, OCPs, progestins) controls bleeding and pain until conception is attempted."
+      },
+      // Section 14
+      {
+        id: 27,
+        sectionId: 14,
+        stem: "Which statement accurately contrasts the anatomical location and definitive diagnostic gold standard of endometriosis versus adenomyosis?",
+        options: [
+          "A. Both are inside the myometrium and diagnosed by serum CA-125",
+          "B. Endometriosis is extrauterine (diagnosed via laparoscopy + biopsy); adenomyosis is intramyometrial (diagnosed definitively via post-hysterectomy histopathology)",
+          "C. Endometriosis is intramyometrial (diagnosed by hysteroscopy); adenomyosis is ovarian (diagnosed by TVS)",
+          "D. Both are diagnosed definitively by transabdominal ultrasound",
+          "E. Endometriosis is cured by hysterectomy alone; adenomyosis is cured by GnRH agonists"
+        ],
+        correctIndex: 1,
+        explanation: "Endometriosis is defined by ectopic endometrial glands/stroma outside the uterus (gold standard: diagnostic laparoscopy + biopsy), whereas adenomyosis is endometrial glands/stroma deep within the myometrium (definitive diagnosis: histopathology of hysterectomy specimen)."
+      },
+      {
+        id: 28,
+        sectionId: 14,
+        stem: "A 34-year-old woman with endometriosis undergoes laparoscopic ovarian cystectomy for a painful 6-cm endometrioma and states she does not want children for at least 4 years. What is the best postoperative strategy to minimize pain recurrence?",
+        options: [
+          "A. No follow-up unless severe pain returns",
+          "B. Immediate initiation of long-term medical suppression (e.g., LNG-IUS or continuous COCs)",
+          "C. Continuous GnRH agonist monotherapy for 4 years",
+          "D. Monthly serum CA-125 surveillance",
+          "E. Bilateral salpingo-oophorectomy"
+        ],
+        correctIndex: 1,
+        explanation: "Because pain recurs in up to 30% of patients after conservative surgery, starting long-term medical therapy (such as LNG-IUS or continuous COCs) immediately postoperatively provides sustained suppression and high compliance."
+      }
+    ];
+
+    // =========================================================================
+    // 3. STATE MANAGEMENT & PERSISTENCE
+    // =========================================================================
+    const STORAGE_KEY_NOTES = "obgyn_endo_adeno_notes_v1";
+    const STORAGE_KEY_QBANK = "obgyn_endo_adeno_qbank_v1";
+
+    let notesState = {
+      completed: {},     // { [sectionId]: boolean }
+      crawlProgress: {}, // { [sectionId]: number (0..100) }
+      openSections: { 1: true } // Section 1 open by default
+    };
+
+    let qbankState = {
+      filterSection: "all",
+      currentFilteredIndex: 0,
+      answers: {},       // { [questionId]: selectedOptionIndex }
+      revealed: {},      // { [questionId]: boolean }
+      struckOptions: {}  // { [questionId]: [optionIndex, ...] }
+    };
+
+    function loadPersistedState() {
+      try {
+        const savedNotes = localStorage.getItem(STORAGE_KEY_NOTES);
+        if (savedNotes) {
+          const parsed = JSON.parse(savedNotes);
+          notesState = { ...notesState, ...parsed };
+        }
+        const savedQbank = localStorage.getItem(STORAGE_KEY_QBANK);
+        if (savedQbank) {
+          const parsedQ = JSON.parse(savedQbank);
+          qbankState = { ...qbankState, ...parsedQ };
+        }
+      } catch (e) {
+        console.warn("Could not load state from localStorage", e);
+      }
+    }
+
+    function saveNotesState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notesState));
+      } catch (e) {}
+    }
+
+    function saveQbankState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_QBANK, JSON.stringify(qbankState));
+      } catch (e) {}
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast-msg");
+      toast.textContent = msg;
+      toast.classList.remove("hidden");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 2400);
+    }
+
+    // =========================================================================
+    // 4. TAB SWITCHING
+    // =========================================================================
+    function switchTab(tabName) {
+      const tabNotes = document.getElementById("tab-notes");
+      const tabQbank = document.getElementById("tab-qbank");
+      const viewNotes = document.getElementById("view-notes");
+      const viewQbank = document.getElementById("view-qbank");
+      const notesControls = document.getElementById("notes-controls");
+      const qbankControls = document.getElementById("qbank-controls");
+
+      if (tabName === "notes") {
+        tabNotes.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-[#0F2942] shadow-sm";
+        tabNotes.setAttribute("aria-selected", "true");
+        tabQbank.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-[#0F2942]";
+        tabQbank.setAttribute("aria-selected", "false");
+
+        viewNotes.classList.remove("hidden");
+        viewQbank.classList.add("hidden");
+        notesControls.classList.remove("hidden");
+        notesControls.classList.add("flex");
+        qbankControls.classList.add("hidden");
+        qbankControls.classList.remove("flex");
+      } else {
+        tabQbank.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-[#0F2942] shadow-sm";
+        tabQbank.setAttribute("aria-selected", "true");
+        tabNotes.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-600 hover:text-[#0F2942]";
+        tabNotes.setAttribute("aria-selected", "false");
+
+        viewQbank.classList.remove("hidden");
+        viewNotes.classList.add("hidden");
+        qbankControls.classList.remove("hidden");
+        qbankControls.classList.add("flex");
+        notesControls.classList.add("hidden");
+        notesControls.classList.remove("flex");
+        renderQbank();
+      }
+    }
+
+    // =========================================================================
+    // 5. STUDY NOTES RENDERING, ACCORDION & CRAWL PROGRESS
+    // =========================================================================
+    function renderTableOfContents() {
+      const tocGrid = document.getElementById("toc-grid");
+      tocGrid.innerHTML = SECTIONS_DATA.map(sec => {
+        const isDone = !!notesState.completed[sec.id];
+        return `
+          <button
+            onclick="jumpToSection(${sec.id})"
+            class="flex items-center justify-between text-left px-3 py-2 rounded-xl border text-xs font-medium transition-all ${
+              isDone
+                ? "bg-teal-50/70 border-teal-200 text-[#0F2942]"
+                : "bg-slate-50/70 hover:bg-white border-slate-200/80 text-slate-700 hover:border-[#0D9488]"
+            }"
+          >
+            <span class="truncate pr-2">${sec.id}. ${sec.title}</span>
+            <span class="shrink-0 font-bold ${isDone ? "text-emerald-600" : "text-slate-400"}">
+              ${isDone ? "✓" : "→"}
+            </span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderSections() {
+      const container = document.getElementById("sections-container");
+      container.innerHTML = SECTIONS_DATA.map(sec => {
+        const isOpen = !!notesState.openSections[sec.id];
+        const isDone = !!notesState.completed[sec.id];
+        const crawlPct = Math.min(100, Math.max(0, Math.round(notesState.crawlProgress[sec.id] || 0)));
+
+        return `
+          <article
+            id="section-card-${sec.id}"
+            data-section-id="${sec.id}"
+            class="emboss-card rounded-2xl overflow-hidden ${isDone ? "border-emerald-300/80" : ""}"
+          >
+            <!-- Clickable Section Header -->
+            <div
+              onclick="toggleSection(${sec.id})"
+              role="button"
+              tabindex="0"
+              aria-expanded="${isOpen}"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection(${sec.id});}"
+              class="cursor-pointer select-none px-4 sm:px-6 py-4 bg-white hover:bg-slate-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            >
+              <div class="flex items-start sm:items-center gap-3">
+                <span class="w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 ${
+                  isDone
+                    ? "bg-emerald-100 text-emerald-700 border border-emerald-200"
+                    : "bg-[#0F2942] text-white"
+                }">
+                  ${isDone ? "✓" : sec.id}
+                </span>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+                      ${sec.partBadge}
+                    </span>
+                    ${isDone ? `<span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Completed</span>` : ""}
+                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-[#0F2942]">
+                    ${sec.title}
+                  </h3>
+                </div>
+              </div>
+
+              <!-- Right Header Meta: Crawl Progress Mini-Indicator + Chevron -->
+              <div class="flex items-center justify-between sm:justify-end gap-3 pl-10 sm:pl-0">
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-lg">
+                  <span class="text-[11px] font-semibold text-slate-500">Crawl:</span>
+                  <div class="w-16 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div
+                      id="header-crawl-bar-${sec.id}"
+                      class="h-full transition-all duration-200 ${crawlPct >= 100 ? "bg-emerald-500" : "bg-[#0D9488]"}"
+                      style="width: ${crawlPct}%"
+                    ></div>
+                  </div>
+                  <span id="header-crawl-pct-${sec.id}" class="text-[11px] font-bold text-[#0F2942] w-8 text-right">${crawlPct}%</span>
+                </div>
+
+                <span class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180 bg-slate-100" : ""}">
+                  ▼
+                </span>
+              </div>
+            </div>
+
+            <!-- Per-Section Top Reading/Crawl Progress Line -->
+            <div class="w-full h-1 bg-slate-100">
+              <div
+                id="line-crawl-bar-${sec.id}"
+                class="h-full transition-all duration-200 ${crawlPct >= 100 ? "bg-emerald-500" : "bg-[#0D9488]"}"
+                style="width: ${crawlPct}%"
+              ></div>
+            </div>
+
+            <!-- Collapsible Body -->
+            <div id="section-body-${sec.id}" class="${isOpen ? "block" : "hidden"} border-t border-slate-100">
+              <div
+                class="p-4 sm:p-6 section-crawl-zone"
+                data-section-id="${sec.id}"
+                onmousemove="handleSectionInteraction(${sec.id}, event)"
+              >
+                ${sec.contentHTML}
+
+                <!-- Compact Exam Summary Box at End of EACH Section -->
+                <div class="mt-6 rounded-xl border border-[#0D9488]/30 bg-[#F0FDFA] p-4 shadow-xs">
+                  <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#0F2942] flex items-center gap-1.5">
+                      <span>🎯</span> Section Exam Takeaway
+                    </h4>
+                    <span class="text-[11px] font-semibold text-[#0D9488]">High-Yield Summary</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                    ${sec.examSummary}
+                  </p>
+                </div>
+
+                <!-- Section Footer: Crawl Status & Completion Checkmark Button -->
+                <div class="mt-5 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div class="flex items-center gap-2.5 text-xs text-slate-500">
+                    <span class="font-semibold text-slate-700">Reading / Crawl Progress:</span>
+                    <div class="w-28 h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div
+                        id="footer-crawl-bar-${sec.id}"
+                        class="h-full transition-all duration-200 ${crawlPct >= 100 ? "bg-emerald-500" : "bg-[#0D9488]"}"
+                        style="width: ${crawlPct}%"
+                      ></div>
+                    </div>
+                    <span id="footer-crawl-pct-${sec.id}" class="font-bold text-[#0F2942]">${crawlPct}%</span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <button
+                      onclick="jumpToSectionQbank(${sec.id})"
+                      class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2942] bg-slate-100 hover:bg-slate-200/80 transition-colors"
+                    >
+                      🩺 Practice Section MCQs
+                    </button>
+                    <button
+                      id="complete-btn-${sec.id}"
+                      onclick="toggleSectionCompleted(${sec.id})"
+                      class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs ${
+                        isDone
+                          ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                          : crawlPct >= 100
+                            ? "bg-[#0D9488] hover:bg-teal-700 text-white ring-2 ring-teal-200"
+                            : "bg-white hover:bg-slate-50 text-[#0F2942] border border-slate-300"
+                      }"
+                    >
+                      <span>${isDone ? "✓ Section Finished" : "✓ Mark Section Finished"}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      updateGlobalProgressBar();
+    }
+
+    function toggleSection(sectionId) {
+      notesState.openSections[sectionId] = !notesState.openSections[sectionId];
+      saveNotesState();
+      renderSections();
+      if (notesState.openSections[sectionId]) {
+        // Trigger initial crawl calculation for newly opened section
+        setTimeout(() => calculateAllVisibleCrawls(), 80);
+      }
+    }
+
+    function expandAllSections() {
+      SECTIONS_DATA.forEach(s => {
+        notesState.openSections[s.id] = true;
+      });
+      saveNotesState();
+      renderSections();
+      setTimeout(() => calculateAllVisibleCrawls(), 80);
+    }
+
+    function collapseAllSections() {
+      notesState.openSections = {};
+      saveNotesState();
+      renderSections();
+    }
+
+    function jumpToSection(sectionId) {
+      notesState.openSections[sectionId] = true;
+      saveNotesState();
+      renderSections();
+      setTimeout(() => {
+        const el = document.getElementById(`section-card-${sectionId}`);
+        if (el) {
+          const yOffset = -125;
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+          calculateAllVisibleCrawls();
+        }
+      }, 60);
+    }
+
+    function toggleSectionCompleted(sectionId) {
+      const nextVal = !notesState.completed[sectionId];
+      notesState.completed[sectionId] = nextVal;
+      if (nextVal) {
+        notesState.crawlProgress[sectionId] = 100;
+        showToast(`Section ${sectionId} marked as finished!`);
+      }
+      saveNotesState();
+      renderTableOfContents();
+      renderSections();
+    }
+
+    function resetStudyProgress() {
+      notesState.completed = {};
+      notesState.crawlProgress = {};
+      saveNotesState();
+      renderTableOfContents();
+      renderSections();
+      showToast("Study progress reset.");
+    }
+
+    function updateGlobalProgressBar() {
+      const total = SECTIONS_DATA.length;
+      const doneCount = SECTIONS_DATA.filter(s => !!notesState.completed[s.id]).length;
+      const pct = Math.round((doneCount / total) * 100);
+
+      document.getElementById("global-progress-text").textContent = `${doneCount} of ${total} Sections Completed`;
+      document.getElementById("global-progress-pct").textContent = `${pct}%`;
+      document.getElementById("global-progress-bar").style.width = `${pct}%`;
+    }
+
+    // =========================================================================
+    // 6. REAL-TIME SCROLL & CURSOR CRAWL TRACKING PER OPEN SECTION
+    // =========================================================================
+    function updateSectionCrawlUI(sectionId, newPct) {
+      const current = notesState.crawlProgress[sectionId] || 0;
+      if (newPct <= current) return; // Monotonic upward progress
+
+      notesState.crawlProgress[sectionId] = newPct;
+      saveNotesState();
+
+      const headerBar = document.getElementById(`header-crawl-bar-${sectionId}`);
+      const headerPct = document.getElementById(`header-crawl-pct-${sectionId}`);
+      const lineBar = document.getElementById(`line-crawl-bar-${sectionId}`);
+      const footerBar = document.getElementById(`footer-crawl-bar-${sectionId}`);
+      const footerPct = document.getElementById(`footer-crawl-pct-${sectionId}`);
+      const completeBtn = document.getElementById(`complete-btn-${sectionId}`);
+
+      if (headerBar) {
+        headerBar.style.width = `${newPct}%`;
+        if (newPct >= 100) headerBar.classList.replace("bg-[#0D9488]", "bg-emerald-500");
+      }
+      if (headerPct) headerPct.textContent = `${newPct}%`;
+      if (lineBar) {
+        lineBar.style.width = `${newPct}%`;
+        if (newPct >= 100) lineBar.classList.replace("bg-[#0D9488]", "bg-emerald-500");
+      }
+      if (footerBar) {
+        footerBar.style.width = `${newPct}%`;
+        if (newPct >= 100) footerBar.classList.replace("bg-[#0D9488]", "bg-emerald-500");
+      }
+      if (footerPct) footerPct.textContent = `${newPct}%`;
+
+      if (newPct >= 100 && completeBtn && !notesState.completed[sectionId]) {
+        completeBtn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs bg-[#0D9488] hover:bg-teal-700 text-white ring-2 ring-teal-200";
+      }
+    }
+
+    function calculateAllVisibleCrawls() {
+      const viewNotes = document.getElementById("view-notes");
+      if (viewNotes.classList.contains("hidden")) return;
+
+      const viewportBottom = window.innerHeight;
+      SECTIONS_DATA.forEach(sec => {
+        if (!notesState.openSections[sec.id]) return;
+        const bodyEl = document.getElementById(`section-body-${sec.id}`);
+        if (!bodyEl) return;
+
+        const rect = bodyEl.getBoundingClientRect();
+        // If section top hasn't entered viewport yet
+        if (rect.top >= viewportBottom) return;
+
+        // Calculate how much of the open section has been scrolled/crawled past
+        const totalHeight = Math.max(rect.height, 1);
+        const crawledPixels = viewportBottom - rect.top;
+        let pct = Math.round((crawledPixels / totalHeight) * 100);
+        pct = Math.max(10, Math.min(100, pct));
+
+        // If bottom of section is visible in viewport, mark 100% crawled
+        if (rect.bottom <= viewportBottom + 20) {
+          pct = 100;
+        }
+        updateSectionCrawlUI(sec.id, pct);
+      });
+    }
+
+    function handleSectionInteraction(sectionId, event) {
+      const bodyEl = document.getElementById(`section-body-${sectionId}`);
+      if (!bodyEl) return;
+      const rect = bodyEl.getBoundingClientRect();
+      const relY = event.clientY - rect.top;
+      const pct = Math.min(100, Math.max(0, Math.round((relY / Math.max(rect.height, 1)) * 100) + 15));
+      updateSectionCrawlUI(sectionId, pct);
+    }
+
+    window.addEventListener("scroll", calculateAllVisibleCrawls, { passive: true });
+    window.addEventListener("resize", calculateAllVisibleCrawls, { passive: true });
+
+    // =========================================================================
+    // 7. AMBOSS-STYLE QBANK RENDERING & INTERACTIONS
+    // =========================================================================
+    function populateSectionFilter() {
+      const select = document.getElementById("section-filter");
+      SECTIONS_DATA.forEach(sec => {
+        const opt = document.createElement("option");
+        opt.value = String(sec.id);
+        opt.textContent = `Section ${sec.id}: ${sec.title}`;
+        select.appendChild(opt);
+      });
+      select.value = qbankState.filterSection;
+    }
+
+    function getFilteredQuestions() {
+      if (qbankState.filterSection === "all") return MCQ_DATA;
+      const secId = Number(qbankState.filterSection);
+      return MCQ_DATA.filter(q => q.sectionId === secId);
+    }
+
+    function filterQuestionsBySection(val) {
+      qbankState.filterSection = val;
+      qbankState.currentFilteredIndex = 0;
+      saveQbankState();
+      renderQbank();
+    }
+
+    function jumpToSectionQbank(sectionId) {
+      qbankState.filterSection = String(sectionId);
+      qbankState.currentFilteredIndex = 0;
+      saveQbankState();
+      document.getElementById("section-filter").value = String(sectionId);
+      switchTab("qbank");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderQbank() {
+      const questions = getFilteredQuestions();
+      if (qbankState.currentFilteredIndex >= questions.length) {
+        qbankState.currentFilteredIndex = 0;
+      }
+      const q = questions[qbankState.currentFilteredIndex];
+      const secObj = SECTIONS_DATA.find(s => s.id === q.sectionId);
+
+      // Update Score Counter across all 28 questions
+      const answeredIds = Object.keys(qbankState.revealed).filter(id => qbankState.revealed[id]);
+      let correctTotal = 0;
+      answeredIds.forEach(id => {
+        const qObj = MCQ_DATA.find(item => item.id === Number(id));
+        if (qObj && qbankState.answers[id] === qObj.correctIndex) {
+          correctTotal++;
+        }
+      });
+      const scorePct = answeredIds.length > 0 ? Math.round((correctTotal / answeredIds.length) * 100) : 0;
+      document.getElementById("qbank-score-badge").textContent =
+        `Score: ${correctTotal} / ${answeredIds.length} (${scorePct}%)`;
+
+      // Render Question Navigator Strip
+      const navGrid = document.getElementById("question-nav-grid");
+      navGrid.innerHTML = questions.map((item, idx) => {
+        const isCurrent = idx === qbankState.currentFilteredIndex;
+        const isRevealed = !!qbankState.revealed[item.id];
+        const chosen = qbankState.answers[item.id];
+        const isCorrect = isRevealed && chosen === item.correctIndex;
+        const isWrong = isRevealed && chosen !== undefined && chosen !== item.correctIndex;
+
+        let pillClass = "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200";
+        if (isCorrect) pillClass = "bg-emerald-500 text-white border-emerald-600";
+        else if (isWrong) pillClass = "bg-rose-500 text-white border-rose-600";
+        else if (isRevealed) pillClass = "bg-amber-400 text-slate-900 border-amber-500";
+
+        if (isCurrent) {
+          pillClass += " ring-2 ring-[#0F2942] ring-offset-1 font-extrabold";
+        }
+
+        return `
+          <button
+            onclick="goToQuestion(${idx})"
+            class="w-7 h-7 rounded-lg text-xs font-semibold border transition-all flex items-center justify-center ${pillClass}"
+          >
+            ${idx + 1}
+          </button>
+        `;
+      }).join("");
+
+      // Render Header & Stem
+      document.getElementById("q-counter").textContent =
+        `Question ${qbankState.currentFilteredIndex + 1} of ${questions.length}`;
+      document.getElementById("q-section-tag").textContent =
+        secObj ? `Sec ${secObj.id}: ${secObj.title}` : `Section ${q.sectionId}`;
+      document.getElementById("q-stem").textContent = q.stem;
+
+      // Render Options with AMBOSS Strike-Out Button
+      const isRevealed = !!qbankState.revealed[q.id];
+      const userChoice = qbankState.answers[q.id];
+      const struckList = qbankState.struckOptions[q.id] || [];
+
+      const optionsContainer = document.getElementById("q-options");
+      optionsContainer.innerHTML = q.options.map((optText, optIdx) => {
+        const isStruck = struckList.includes(optIdx);
+        let boxClasses = "border-slate-200 bg-white hover:border-[#0D9488] hover:bg-slate-50/70 text-slate-800";
+        let badgeHTML = "";
+
+        if (isRevealed) {
+          if (optIdx === q.correctIndex) {
+            boxClasses = "border-emerald-500 bg-emerald-50/90 text-emerald-950 font-semibold";
+            badgeHTML = `<span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md shrink-0">✓ Correct</span>`;
+          } else if (optIdx === userChoice) {
+            boxClasses = "border-rose-500 bg-rose-50/90 text-rose-950 font-semibold";
+            badgeHTML = `<span class="text-xs font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-md shrink-0">✕ Your Answer</span>`;
+          } else {
+            boxClasses = "border-slate-200 bg-slate-50/50 text-slate-500";
+          }
+        } else if (userChoice === optIdx) {
+          boxClasses = "border-[#0F2942] bg-slate-100 text-[#0F2942] font-semibold";
+        }
+
+        return `
+          <div class="flex items-stretch gap-2">
+            <button
+              onclick="selectOption(${q.id}, ${optIdx})"
+              ${isRevealed ? "disabled" : ""}
+              class="flex-1 text-left px-4 py-3 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${boxClasses} ${isStruck && !isRevealed ? "option-struck" : ""}"
+            >
+              <span>${optText}</span>
+              ${badgeHTML}
+            </button>
+            <button
+              onclick="toggleStrikeOption(${q.id}, ${optIdx})"
+              title="Cross out distractor (AMBOSS strike-out)"
+              class="px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-400 hover:text-slate-700 text-xs font-bold transition-colors shrink-0"
+            >
+              ${isStruck ? "Undo" : "abc"}
+            </button>
+          </div>
+        `;
+      }).join("");
+
+      // Render Explanation Box
+      const expBox = document.getElementById("q-explanation-box");
+      const expText = document.getElementById("q-explanation-text");
+      if (isRevealed) {
+        expBox.classList.remove("hidden");
+        expText.textContent = q.explanation;
+      } else {
+        expBox.classList.add("hidden");
+      }
+
+      // Navigation Buttons State
+      document.getElementById("btn-prev-q").disabled = qbankState.currentFilteredIndex === 0;
+      document.getElementById("btn-next-q").disabled = qbankState.currentFilteredIndex >= questions.length - 1;
+      const submitBtn = document.getElementById("btn-show-answer");
+      submitBtn.textContent = isRevealed ? "Answer Revealed ✓" : "Show Answer / Submit";
+      submitBtn.disabled = isRevealed;
+    }
+
+    function selectOption(questionId, optionIndex) {
+      if (qbankState.revealed[questionId]) return;
+      qbankState.answers[questionId] = optionIndex;
+      qbankState.revealed[questionId] = true;
+      saveQbankState();
+      renderQbank();
+    }
+
+    function revealCurrentAnswer() {
+      const questions = getFilteredQuestions();
+      const q = questions[qbankState.currentFilteredIndex];
+      if (!q) return;
+      qbankState.revealed[q.id] = true;
+      saveQbankState();
+      renderQbank();
+    }
+
+    function toggleStrikeOption(questionId, optionIndex) {
+      if (!qbankState.struckOptions[questionId]) {
+        qbankState.struckOptions[questionId] = [];
+      }
+      const list = qbankState.struckOptions[questionId];
+      const idx = list.indexOf(optionIndex);
+      if (idx > -1) list.splice(idx, 1);
+      else list.push(optionIndex);
+      saveQbankState();
+      renderQbank();
+    }
+
+    function goToQuestion(idx) {
+      qbankState.currentFilteredIndex = idx;
+      saveQbankState();
+      renderQbank();
+    }
+
+    function prevQuestion() {
+      if (qbankState.currentFilteredIndex > 0) {
+        qbankState.currentFilteredIndex--;
+        saveQbankState();
+        renderQbank();
+      }
+    }
+
+    function nextQuestion() {
+      const questions = getFilteredQuestions();
+      if (qbankState.currentFilteredIndex < questions.length - 1) {
+        qbankState.currentFilteredIndex++;
+        saveQbankState();
+        renderQbank();
+      }
+    }
+
+    function resetQbank() {
+      qbankState.answers = {};
+      qbankState.revealed = {};
+      qbankState.struckOptions = {};
+      qbankState.currentFilteredIndex = 0;
+      saveQbankState();
+      renderQbank();
+      showToast("Qbank quiz reset.");
+    }
+
+    // =========================================================================
+    // 8. INITIALIZATION
+    // =========================================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      loadPersistedState();
+      renderTableOfContents();
+      renderSections();
+      populateSectionFilter();
+      renderQbank();
+      setTimeout(() => calculateAllVisibleCrawls(), 120);
+    });
+  </script>
+</body>
+</html>
